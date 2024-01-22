@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shortened URL</title>
+</head>
+<body>
+    <h1>Your URL has been shortened!</h1>
+    <p>Shortened URL: <a href="{{ url_for('shortcode_redirect', shortcode=shortcode) }}">{{ url_for('shortcode_redirect', shortcode=shortcode) }}</a></p>
+</body>
+</html>
