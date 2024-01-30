@@ -52,7 +52,8 @@ class LoginForm(FlaskForm):
 
 @application.route('/')
 def index():
-    return render_template('index.html')
+    #return render_template('index.html')
+    return redirect("https://artqr.in")
 
 @application.route('/home', methods=['GET', 'POST'])
 @login_required
