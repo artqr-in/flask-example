@@ -6,7 +6,7 @@
     <title>URL Shortener</title>
 </head>
 <body>
-    <h1>Welcome to the URL Shortener</h1>
+    <h1>Welcome to the URL Shortener {{username}} ! </h1>
     <form action="{{ url_for('shortenurl') }}" method="post">
         <label for="url">Enter URL:</label>
         <input type="url" name="url" required>
@@ -14,5 +14,16 @@
         <input type="text" name="shortcode">
         <button type="submit">Shorten URL</button>
     </form>
+
+    <br>
+    <p> Current URL redirects database:</p>
+    <table border="1">
+        <thead><tr> <th>  ShortCode  </th> <th> RedirectedUrl </th></tr></thead>
+        <tbody>
+            {% for key, value in urls.items() %}
+                <tr><td>   {{key}} </td> <td>  {{value}} </td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

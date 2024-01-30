@@ -8,5 +8,8 @@
 <body>
     <h1>Your URL has been shortened!</h1>
     <p>Shortened URL: <a href="{{ url_for('shortcode_redirect', shortcode=shortcode) }}">{{ url_for('shortcode_redirect', shortcode=shortcode) }}</a></p>
+    <br>
+    <br>
+    <a href="{{url_for('home')}}"> Home </a> 
 </body>
 </html>
