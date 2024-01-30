@@ -21,23 +21,18 @@ bcrypt = Bcrypt(application)
 login_manager = LoginManager()
 login_manager.init_app(application)
 login_manager.login_view = 'login'
-'''
+
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
-'''
-class Userlocal:
-    def __init__(self, un,pw):
-        self.un = un
-        self.pw = pw
-        self.is_active = True
-    def get_id(self):
-        return 1
+    return User(user_id)
 
-class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), nullable=False, unique=True)
-    password = db.Column(db.String(80), nullable=False)
+
+class User(UserMixin):
+    def __init__(self, username):
+        self.username = username
+
+    def get_id(self):
+        return self.username
 
 class RegisterForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4,max=20)],render_kw={'placeholder':'Username'})
@@ -77,7 +72,7 @@ def login():
         pw = form.password.data
         print(user,pw)
         if (user == "sunny" or user=="bindu") and pw=="admin":
-            login_user(Userlocal(user,pw))
+            login_user(User(user))
             session['username'] = user
             return redirect(url_for('home'))
 
