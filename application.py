@@ -26,6 +26,14 @@ login_manager.login_view = 'login'
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+class Userlocal:
+    def __init__(self, un,pw):
+        self.un = un
+        self.pw = pw
+        self.is_active = True
+    def get_id(self):
+        return 1
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
@@ -65,16 +73,11 @@ def home():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        '''
-        user = User.query.filter_by(username=form.username.data).first()
-        if user:
-            if bcrypt.check_password_hash(user.password, form.password.data):
-                login_user(user)
-                session['username'] = user.username
-        '''
         user = form.username.data
         pw = form.password.data
+        print(user,pw)
         if (user == "sunny" or user=="bindu") and pw=="admin":
+            login_user(Userlocal(user,pw))
             session['username'] = user
             return redirect(url_for('home'))
 
@@ -92,7 +95,6 @@ def register():
     return render_template('register.html', form=form)
 '''
 @application.route('/shortenurl', methods=['GET', 'POST'])
-@login_required
 def shortenurl():
     if request.method == 'POST':
         urls = {}
