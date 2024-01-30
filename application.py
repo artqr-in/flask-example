@@ -17,14 +17,7 @@ application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 application.config['SECRET_KEY'] = "thisisasecretkey"
 db = SQLAlchemy(application)
 bcrypt = Bcrypt(application)
-'''
-try:
-    with application.app_context().push():
-        db.create_all()
-    print("$$$$$$$$$$ connected")
-except sqlite3.error as e:
-    print("********* Connection Error ")
-'''
+
 login_manager = LoginManager()
 login_manager.init_app(application)
 login_manager.login_view = 'login'
@@ -72,15 +65,21 @@ def home():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
+        '''
         user = User.query.filter_by(username=form.username.data).first()
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
                 session['username'] = user.username
-                return redirect(url_for('home'))
+        '''
+        user = form.username.data
+        pw = form.password.data
+        if (user == "sunny" or user=="bindu") and pw=="admin":
+            session['username'] = user
+            return redirect(url_for('home'))
 
     return render_template('login.html', form=form)
-
+'''
 @application.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
@@ -91,7 +90,7 @@ def register():
         db.session.commit()
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
-
+'''
 @application.route('/shortenurl', methods=['GET', 'POST'])
 @login_required
 def shortenurl():
