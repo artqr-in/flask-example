@@ -7,6 +7,7 @@ from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
 import json
 import os.path
+import sqlite3
 
 application = Flask(__name__)
 
@@ -16,6 +17,13 @@ application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 application.config['SECRET_KEY'] = "thisisasecretkey"
 db = SQLAlchemy(application)
 bcrypt = Bcrypt(application)
+
+try:
+    application.app_context().push()
+    db.create_all()
+    print("$$$$$$$$$$ connected")
+except sqlite3.error as e:
+    print("********* Connection Error ")
 
 login_manager = LoginManager()
 login_manager.init_app(application)
