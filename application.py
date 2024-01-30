@@ -10,8 +10,8 @@ import os.path
 
 application = Flask(__name__)
 
-#application.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
-application.config['SQLALCHEMY_DATABASE_URI'] = "sqlite+s3://artqr/code/flask-tutorial/database.db"
+application.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
+#application.config['SQLALCHEMY_DATABASE_URI'] = "sqlite+s3://artqr/code/flask-tutorial/database.db"
 application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 application.config['SECRET_KEY'] = "thisisasecretkey"
 db = SQLAlchemy(application)
