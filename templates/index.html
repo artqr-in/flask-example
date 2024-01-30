@@ -4,12 +4,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UserHome</title>
+    <title>Artistic QR Code Service</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #4a90e2;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        a {
+            display: block;
+            color: #4a90e2;
+            text-decoration: none;
+            font-size: 18px;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #1565c0;
+        }
+    </style>
 </head>
 <body>
-    <h1>  Login Authentication System  </h1>
-    <a href="{{url_for('login')}}"> Login Page</a> <br>
-    <a href="{{url_for('register')}}"> Register Page</a> <br>
-
+    <div class="container">
+        <h1>Artistic QR Code Service</h1>
+        <a href="{{url_for('login')}}">Login Page</a>
+        <a href="{{url_for('register')}}">Register Page</a>
+    </div>
 </body>
 </html>

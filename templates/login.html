@@ -4,17 +4,74 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Artful Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #4CAF50;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"],
+        input[type="password"],
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        a {
+            display: block;
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        a:hover {
+            color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <h1> Login Page </h1>
-    <form method="POST" action="">
-        {{form.hidden_tag()}}
-        {{form.username}}<br>
-        {{form.password}}<br>
-        {{form.submit}}    
-    </form>
-
-    <a href="{{url_for('register')}}"> Dont have an account? Sign Up!</a> 
+    <div class="container">
+        <h1>Login Page</h1>
+        <form method="POST" action="">
+            {{form.hidden_tag()}}
+            {{form.username}}<br>
+            {{form.password}}<br>
+            {{form.submit}}    
+        </form>
+        <a href="{{url_for('register')}}">Don't have an account? Sign Up!</a>
+    </div>
 </body>
 </html>
