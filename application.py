@@ -117,5 +117,8 @@ def shortcode_redirect(shortcode):
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+'''
 if __name__ == '__main__':
     application.run(debug=True)
+'''
