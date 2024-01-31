@@ -63,6 +63,7 @@ def home():
     if os.path.exists('urls.json'):
         with open('urls.json') as url_storage:
             urls = json.load(url_storage)
+    session['urls'] = urls
     return render_template('home.html', username=username, urls=urls)
 
 @application.route('/login', methods=['GET', 'POST'])
@@ -117,6 +118,19 @@ def shortcode_redirect(shortcode):
             urls = json.load(url_storage)
             if shortcode in urls.keys():
                 return redirect(urls[shortcode])
+            
+@application.route('/delete_entry/<string:key>', methods=['POST'])
+def delete_entry(key):
+    if request.method == 'POST':
+        urls = session.get('urls', {})
+        print(urls)
+        if key in urls:
+            del urls[key]
+            session['urls'] = urls
+            with open('urls.json', 'w') as url_storage:
+                json.dump(urls, url_storage)
+            return redirect(url_for('home'))
+    return 'Entry not found or invalid request method'
             
 @application.route('/logout', methods=['GET', 'POST'])
 @login_required

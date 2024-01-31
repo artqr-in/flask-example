@@ -13,7 +13,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
         }
         .container {
             text-align: center;
@@ -21,6 +21,9 @@
             border-radius: 10px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-height: 80vh;
+            overflow-y: auto;
+            width: 80%; 
         }
         h1 {
             color: #2196F3;
@@ -43,6 +46,18 @@
             border-radius: 5px;
             border: 1px solid #ccc;
             margin-bottom: 10px;
+            word-wrap: break-word;
+        }
+        .delete-btn {
+            background-color: #FF0000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .delete-btn:hover {
+            background-color: #CC0000;
         }
         button[type="submit"] {
             padding: 10px 20px;
@@ -65,9 +80,15 @@
             border: 1px solid #ddd;
             padding: 10px;
             text-align: left;
+            word-wrap: break-word;
         }
         th {
             background-color: #f2f2f2;
+        }
+        .url-text {
+            max-width: 300px;
+            overflow-wrap: break-word;
+            word-wrap: break-word; /* Wrap long URLs */
         }
     </style>
 </head>
@@ -75,10 +96,10 @@
     <div class="container">
         <h1>Welcome to the Artful URL Shortener, {{username}}!</h1>
         <form action="{{ url_for('shortenurl') }}" method="post">
+            <label for="shortcode">Custom Shortcode:</label>
+            <input type="text" name="shortcode" required>
             <label for="url">Enter URL:</label>
             <input type="url" name="url" required>
-            <label for="shortcode">Custom Shortcode (optional):</label>
-            <input type="text" name="shortcode">
             <button type="submit">Shorten URL</button>
         </form>
 
@@ -93,8 +114,13 @@
             <tbody>
                 {% for key, value in urls.items() %}
                 <tr>
-                    <td>{{ key }}</td>
-                    <td>{{ value }}</td>
+                    <td><a href="{{ url_for('shortcode_redirect', shortcode=key) }}">{{ key }}</a></td>
+                    <td class="url-text">{{ value }}</td>
+                    <td>
+                        <form action="{{ url_for('delete_entry', key=key) }}" method="post">
+                            <button class="delete-btn" type="submit">Delete</button>
+                        </form>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
